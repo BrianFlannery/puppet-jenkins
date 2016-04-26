@@ -200,13 +200,28 @@ class jenkins::slave (
       $defaults_group = 'root'
       $manage_user_home = true
 
-      file { '/etc/init.d/jenkins-slave':
-        ensure => 'file',
-        mode   => '0755',
-        owner  => 'root',
-        group  => 'root',
-        source => "puppet:///modules/${module_name}/jenkins-slave.${::osfamily}",
-        notify => Service['jenkins-slave'],
+      if $::systemd {
+        file {
+          '/usr/local/sbin/jenkins-slave':
+            source => "puppet:///modules/${module_name}/jenkins-slave.sh",
+            notify => Service['jenkins-slave'],
+            mode   => '0700';
+          '/etc/init.d/jenkins-slave':
+            ensure => 'absent',
+        }
+        systemd::unit_file { 'jenkins-slave.service':
+          source => "puppet:///modules/${module_name}/jenkins-slave.service",
+          notify => Service['jenkins-slave'],
+        }
+      } else {
+        file { '/etc/init.d/jenkins-slave':
+          ensure => 'file',
+          mode   => '0755',
+          owner  => 'root',
+          group  => 'root',
+          source => "puppet:///modules/${module_name}/jenkins-slave.${::osfamily}",
+          notify => Service['jenkins-slave'],
+        }
       }
     }
     'Darwin': {
