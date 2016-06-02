@@ -193,18 +193,19 @@ class jenkins::slave (
       $manage_user_home = true
 
       if $::systemd {
+        include ::systemd
         file {
           '/usr/local/sbin/jenkins-slave':
             source => "puppet:///modules/${module_name}/jenkins-slave.sh",
-            notify => Service['jenkins-slave'],
+            # notify => Service['jenkins-slave'],
             mode   => '0700';
           '/etc/init.d/jenkins-slave':
             ensure => 'absent',
-        }
+        } ~> Exec['systemctl-daemon-reload'] -> Service['jenkins-slave']
         systemd::unit_file { 'jenkins-slave.service':
           source => "puppet:///modules/${module_name}/jenkins-slave.service",
-          notify => Service['jenkins-slave'],
-        }
+          # notify => Service['jenkins-slave'],
+        } ~> Exec['systemctl-daemon-reload'] -> Service['jenkins-slave']
       } else {
         file { '/etc/init.d/jenkins-slave':
           ensure => 'file',
@@ -277,8 +278,9 @@ class jenkins::slave (
     owner   => $defaults_user,
     group   => $defaults_group,
     content => template("${module_name}/jenkins-slave-defaults.erb"),
-    notify  => Service['jenkins-slave'],
-  }
+    # notify  => Service['jenkins-slave'],
+  } ~> Exec['systemctl-daemon-reload'] -> Service['jenkins-slave']
+  
 
   if ($manage_client_jar) {
     archive { 'get_swarm_client':
