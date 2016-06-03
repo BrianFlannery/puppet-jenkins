@@ -287,7 +287,7 @@ class jenkins::slave (
     group   => $defaults_group,
     content => template("${module_name}/jenkins-slave-defaults.erb"),
     # notify  => Service['jenkins-slave'],
-  } ~> Exec['systemctl-daemon-reload'] -> Service['jenkins-slave']
+  } -> Service['jenkins-slave']
   
 
   if ($manage_client_jar) {
@@ -297,6 +297,7 @@ class jenkins::slave (
       proxy_server => $proxy_server,
       cleanup      => false,
       extract      => false,
+      
     } ->
     Service['jenkins-slave']
   }
