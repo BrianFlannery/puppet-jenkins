@@ -297,7 +297,7 @@ class jenkins::slave (
       proxy_server => $proxy_server,
       cleanup      => false,
       extract      => false,
-      
+      user         => $slave_user,
     } ->
     Service['jenkins-slave']
   }
