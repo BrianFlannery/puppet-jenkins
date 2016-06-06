@@ -5,7 +5,7 @@
 class jenkins::firewall {
 
   if $caller_module_name != $module_name {
-    fail("Use of private class ${name} by ${caller_module_name}")
+    fail("Use of private class name ${name} by caller_module_name ${caller_module_name}, whereas module_name is ${module_name}.")
   }
 
   firewall { '500 allow Jenkins inbound traffic':
@@ -14,4 +14,5 @@ class jenkins::firewall {
     dport  => [jenkins_port()],
     proto  => 'tcp',
   }
+
 }
