@@ -291,6 +291,10 @@ class jenkins::slave (
       extract      => false,
       user         => $slave_user,
     } ->
+    file { "${slave_home}/${client_jar}":
+      ensure => 'file',
+      owner  => $slave_user,
+    } ->
     Service['jenkins-slave']
   }
 
