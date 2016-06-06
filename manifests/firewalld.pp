@@ -11,12 +11,6 @@ class jenkins::firewalld {
   # if $::firewalld {
   if defined('::firewalld') {
     
-    notice("lookupvar('::jenkins::params::port')")
-    # notice(lookupvar('::jenkins::params::port'))
-    notice("${::jenkins::params::port}")
-    notice("${::jenkins::slaveagentport}")
-    notice("${::jenkins::params::slaveagentport}")
-    notice("")
     firewalld_port { 'Open port in the public zone for HTTP Jenkins web GUI':
       ensure   => present,
       zone     => 'public',
