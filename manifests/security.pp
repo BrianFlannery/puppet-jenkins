@@ -18,6 +18,16 @@
 #
 class jenkins::security (
   $security_model = undef,
+  $ldapServer = undef,
+  $ldapRootDn = undef,
+  $ldapUserSBase = undef,
+  $ldapUserSearch = undef,
+  $ldapGroupSBase = undef,
+  $ldapMgrDn = undef,
+  $ldapMgrPw = undef,
+  $ldapInhibitIRDN = undef,
+  $authorizationStrategy = 'ProjectMatrixAuthorizationStrategy',
+  $authorizedGlobalAdmins = [],
 ){
   validate_string($security_model)
 
@@ -32,6 +42,16 @@ class jenkins::security (
     command => [
       'set_security',
       $security_model,
+      $ldapServer,
+      $ldapRootDn,
+      $ldapUserSBase,
+      $ldapUserSearch,
+      $ldapGroupSBase,
+      $ldapMgrDn,
+      $ldapMgrPw,
+      $ldapInhibitIRDN,
+      $authorizationStrategy,
+      $authorizedGlobalAdmins,
     ],
   }
 }
