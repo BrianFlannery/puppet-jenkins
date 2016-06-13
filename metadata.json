@@ -1,6 +1,6 @@
 {
   "name": "gsio-jenkins",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "author": "Brian Flannery <bflannery.0wK0@gmail.com>",
   "license": "Apache-2.0",
   "summary": "Manage the Jenkins continuous integration service with Puppet",
