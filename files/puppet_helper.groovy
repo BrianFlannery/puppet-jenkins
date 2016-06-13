@@ -656,7 +656,7 @@ class Actions {
    * only a small number of configurations. If authentication is enabled, it
    * uses the internal user database.
   */
-  void set_security(String security_model,
+  void set_security( String security_model,
     String ldapServer="",
     String ldapRootDn="",
     String ldapUserSBase="",
@@ -666,7 +666,7 @@ class Actions {
     String ldapMgrPw="",
     String ldapInhibitIRDN="",
     String authorizationStrategy="",
-    String[] authorizedGlobalAdmins=[],
+    String[] authorizedGlobalAdmins=[]
   ) {
     def j = Jenkins.getInstance()
 
@@ -685,24 +685,53 @@ class Actions {
       case 'ldap':
         switch (authorizationStrategy) {
           case 'ProjectMatrixAuthorizationStrategy':
-            strategy = hudson.security.ProjectMatrixAuthorizationStrategy()
+            strategy = new hudson.security.ProjectMatrixAuthorizationStrategy()
             strategy.add(Jenkins.READ, "authenticated")
             authorizedGlobalAdmins.each { u ->
               strategy.add(Jenkins.ADMINISTER, u)
             }
             break
           default:
-            strategy = hudson.security.FullControlOnceLoggedInAuthorizationStrategy()
+            strategy = new hudson.security.FullControlOnceLoggedInAuthorizationStrategy()
         }
+        boolean disableMailAddressResolver = false
+        boolean ldapInhibitIRDN_bool = ( "true" == ldapInhibitIRDN ) ? true : false
+        // LDAPSecurityRealm(String server, 
+                          // String rootDN, 
+                          // String userSearchBase, 
+                          // String userSearch, 
+                          // String groupSearchBase, 
+                          // String groupSearchFilter, 
+                          // LDAPGroupMembershipStrategy groupMembershipStrategy, 
+                          // String managerDN, 
+                          // Secret managerPasswordSecret, 
+                          // boolean inhibitInferRootDN, 
+                          // boolean disableMailAddressResolver, 
+                          // CacheConfiguration cache, 
+                          // EnvironmentProperty[] environmentProperties, 
+                          // String displayNameAttributeName, 
+                          // String mailAddressAttributeName, 
+                          // IdStrategy userIdStrategy, 
+                          // IdStrategy groupIdStrategy) {
+        //
         realm = new hudson.security.LDAPSecurityRealm(
-            ldapServer,
-            ldapRootDn,
-            ldapUserSBase,
-            ldapUserSearch,
-            ldapGroupSBase,
-            ldapMgrDn,
-            ldapMgrPw,
-            ldapInhibitIRDN
+            ldapServer, 
+            ldapRootDn, 
+            ldapUserSBase, 
+            ldapUserSearch, 
+            ldapGroupSBase, 
+            "", // String groupSearchFilter,
+            null, // LDAPGroupMembershipStrategy groupMembershipStrategy,
+            ldapMgrDn, 
+            ldapMgrPw, 
+            ldapInhibitIRDN, 
+            disableMailAddressResolver, 
+            null, // CacheConfiguration cache,
+            null, // EnvironmentProperty[] environmentProperties,
+            "", // String displayNameAttributeName,
+            "", // String mailAddressAttributeName,
+            null, // IdStrategy userIdStrategy, 
+            null // IdStrategy groupIdStrategy
           ) ;
         break
       case 'unsecured':
