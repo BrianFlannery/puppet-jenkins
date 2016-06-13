@@ -28,7 +28,7 @@ class jenkins::security (
   $ldapInhibitIRDN = undef,
   $authorizationStrategy = 'ProjectMatrixAuthorizationStrategy',
   $authorizedGlobalAdmins = [],
-){
+) {
   validate_string($security_model)
 
   include ::jenkins::cli_helper
