@@ -7,12 +7,15 @@ gem 'rspec-puppet', '~> 2.1.0'
 gem 'puppetlabs_spec_helper',   :require => false
 gem 'puppet-syntax', '>= 1.1.0'
 gem 'json'
-gem 'puppet', ENV['PUPPET_VERSION'] || '~> 3.5'
+# gem 'puppet', ENV['PUPPET_VERSION'] || '~> 3.5'
+gem 'puppet', ENV['PUPPET_VERSION'] || '~> 4.3.2'
 gem 'metadata-json-lint'
 gem 'retries', '~> 0.0.5'
 gem 'travis', '~> 1.8'
 gem 'parallel_tests'
 gem 'rubocop', '~> 0.39'
+# gem 'syck'
+gem 'bundler', '1.10.5'
 
 group :development do
   gem 'simplecov'
