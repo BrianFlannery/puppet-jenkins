@@ -1,11 +1,12 @@
 {
-  "name": "rtyler-jenkins",
   "comment1": {
+  "name": "rtyler-jenkins",
   "version": "1.7.0",
   "author": "R. Tyler Croy <tyler@monkeypox.org>, Joshua Hoblitt <josh@hoblitt.com>"
   },
-  "version": "1.7.0",
-  "author": "gs rebase of 1.7.0, R. Tyler Croy <tyler@monkeypox.org>, Joshua Hoblitt <josh@hoblitt.com>",
+  "name": "gsio-jenkins",
+  "version": "1.7.1",
+  "author": "gs rebase of 1.7.0, R. Tyler Croy <tyler@monkeypox.org>, Joshua Hoblitt <josh@hoblitt.com> per Brian Flannery <bflannery.0wK0@gmail.com>",
   "license": "Apache-2.0",
   "summary": "Manage the Jenkins continuous integration service with Puppet",
   "source": "https://github.com/jenkinsci/puppet-jenkins",
