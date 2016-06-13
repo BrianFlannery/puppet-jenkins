@@ -643,7 +643,18 @@ class Actions {
    * only a small number of configurations. If authentication is enabled, it
    * uses the internal user database.
   */
-  void set_security(String security_model) {
+  void set_security(String security_model,
+    String ldapServer="",
+    String ldapRootDn="",
+    String ldapUserSBase="",
+    String ldapUserSearch="",
+    String ldapGroupSBase="",
+    String ldapMgrDn="",
+    String ldapMgrPw="",
+    String ldapInhibitIRDN="",
+    String authorizationStrategy="",
+    String[] authorizedGlobalAdmins=[],
+  ) {
     def j = Jenkins.getInstance()
 
     if (security_model == 'disabled') {
@@ -657,6 +668,29 @@ class Actions {
       case 'full_control':
         strategy = new hudson.security.FullControlOnceLoggedInAuthorizationStrategy()
         realm = new hudson.security.HudsonPrivateSecurityRealm(false, false, null)
+        break
+      case 'ldap':
+        switch (authorizationStrategy) {
+          case 'ProjectMatrixAuthorizationStrategy':
+            strategy = hudson.security.ProjectMatrixAuthorizationStrategy()
+            strategy.add(Jenkins.READ, "authenticated")
+            authorizedGlobalAdmins.each { u ->
+              strategy.add(Jenkins.ADMINISTER, u)
+            }
+            break
+          default:
+            strategy = hudson.security.FullControlOnceLoggedInAuthorizationStrategy()
+        }
+        realm = new hudson.security.LDAPSecurityRealm(
+            ldapServer,
+            ldapRootDn,
+            ldapUserSBase,
+            ldapUserSearch,
+            ldapGroupSBase,
+            ldapMgrDn,
+            ldapMgrPw,
+            ldapInhibitIRDN
+          ) ;
         break
       case 'unsecured':
         strategy = new hudson.security.AuthorizationStrategy.Unsecured()
