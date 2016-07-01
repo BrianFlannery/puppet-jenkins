@@ -15,7 +15,7 @@ gem 'travis', '~> 1.8'
 gem 'parallel_tests'
 gem 'rubocop', '~> 0.39'
 # gem 'syck'
-gem 'bundler', '1.10.5'
+gem 'bundler', '>= 1.10.5'
 
 group :development do
   gem 'simplecov'
