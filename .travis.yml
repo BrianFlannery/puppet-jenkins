@@ -13,15 +13,25 @@ env:
   - PUPPET_VERSION="~> 4.5.0"
 matrix:
   include:
-    - rvm: '2.1'
+    - rvm: '2.2.3'
       sudo: required
       services: docker
+      # env: BEAKER_set="centos-6-docker"
+      env:
+        - BEAKER_set="centos-6-docker"
+        - PUPPET_DEBUG=true
+      script: bundle exec rake acceptance
+      bundler_args: --without development
+    - rvm: '2.2.3'
+      sudo: required
+      services: docker
+      # env: BEAKER_set="centos-7-docker"
       env:
         - BEAKER_set="centos-7-docker"
         - PUPPET_DEBUG=true
       script: bundle exec rake acceptance
       bundler_args: --without development
-    - rvm: '2.1'
+    - rvm: '2.2.3'
       sudo: required
       services: docker
       env: BEAKER_set="ubuntu-14.04-docker"
