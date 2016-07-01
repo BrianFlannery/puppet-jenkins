@@ -16,7 +16,7 @@ gem 'parallel_tests'
 # gem 'rubocop', '~> 0.39'
 gem 'rubocop', '< 0.42.0'
 # gem 'syck'
-gem 'bundler', '1.10.5'
+gem 'bundler', '>= 1.10.5'
 
 gem 'json_pure', '< 2.0.2'
 
