@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:7.2.1511
 MAINTAINER puppet-jenkins
 ENV container docker
 
