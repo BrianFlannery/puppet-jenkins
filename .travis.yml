@@ -9,7 +9,6 @@ rvm:
 script:
   - "bundle exec rake SPEC_OPTS='--format documentation --order random'"
 env:
-  - PUPPET_VERSION="~> 3.8.0"
   - PUPPET_VERSION="~> 4.4.0"
   - PUPPET_VERSION="~> 4.5.0"
 matrix:
