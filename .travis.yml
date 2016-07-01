@@ -14,12 +14,12 @@ env:
   - PUPPET_VERSION="~> 4.4.2"
 matrix:
   include:
-    - rvm: '2.2.3'
-      sudo: required
-      services: docker
-      env: BEAKER_set="centos-6-docker"
-      script: bundle exec rake acceptance
-      bundler_args: --without development
+    # - rvm: '2.2.3'
+    #   sudo: required
+    #   services: docker
+    #   env: BEAKER_set="centos-6-docker"
+    #   script: bundle exec rake acceptance
+    #   bundler_args: --without development
     - rvm: '2.2.3'
       sudo: required
       services: docker
