@@ -34,6 +34,7 @@ describe 'jenkins_credentials' do
 
       context 'BasicSSHUserPrivateKey' do
         it 'should work with no errors' do
+          let(:params) { {'version' => '1.651.3'} }
           pp = base_manifest + <<-EOS
             jenkins_credentials { 'a0469025-1202-4007-983d-0c62f230f1a7':
               ensure      => 'present',
