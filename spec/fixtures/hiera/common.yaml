@@ -1,0 +1,3 @@
+---
+jenkins::lts: true
+jenkins::version: 1.651.3
