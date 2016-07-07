@@ -59,6 +59,7 @@ EOS
 
   context 'ensure =>' do
     context 'present' do
+      let(:params) { {'version' => '1.651.3'} }
       it 'should work with no errors' do
         pp = base_manifest + <<-EOS
           jenkins_job { 'foo':

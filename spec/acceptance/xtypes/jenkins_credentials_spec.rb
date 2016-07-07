@@ -34,6 +34,7 @@ describe 'jenkins_credentials' do
 
       context 'BasicSSHUserPrivateKey' do
         it 'should work with no errors' do
+          let(:params) { {'version' => '1.651.3'} }
           pp = base_manifest + <<-EOS
             jenkins::plugin { 'ssh-credentials': }
 
