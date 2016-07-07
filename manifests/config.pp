@@ -6,7 +6,19 @@ class jenkins::config {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  create_resources( 'jenkins::sysconfig', $::jenkins::config_hash )
+  $config_hash_defaults = {
+    'JENKINS_JAVA_OPTIONS' => {
+      value => '-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false',
+    },
+    'JENKINS_AJP_PORT' => {
+      value => '-1',
+    },
+  }
+
+  $config_hash = merge($config_hash_defaults, $::jenkins::config_hash)
+
+  create_resources( 'jenkins::sysconfig', $config_hash )
+  #create_resources( 'jenkins::sysconfig', $::jenkins::config_hash )
 
   $dir_params = {
     ensure => directory,
