@@ -10,12 +10,20 @@ $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/fixtures/modules/
 require 'spec/helpers/rspechelpers'
 
 RSpec.configure do |c|
+  # hiera test fixtures
+  c.hiera_config = File.join(File.dirname(File.expand_path(__FILE__)), 'fixtures', 'hiera', 'hiera.yaml')
+
   # Override puppetlabs_spec_helper's stupid setting of mock_with to :mocha,
   # which is a totally piece of garbage mocking library
   c.mock_with :rspec
   c.deprecation_stream = '/dev/null'
 
   c.include(Jenkins::RSpecHelpers)
+  c.after(:suite) do
+    # RSpec::Puppet::Coverage.report!
+    # RSpec::Puppet::Coverage.report!(90)
+    RSpec::Puppet::Coverage.report!(99)
+  end
 end
 
 # a simple class to inject :undef
