@@ -11,7 +11,7 @@ require 'spec/helpers/rspechelpers'
 
 RSpec.configure do |c|
   # hiera test fixtures
-  c.hiera_config = File.join(File.dirname(File.expand_path(__FILE__)), 'fixtures', 'hiera', 'hiera.yaml')
+  c.hiera_config = File.join(File.dirname(File.expand_path(__FILE__)), 'fixtures', 'hiera.yaml')
 
   # Override puppetlabs_spec_helper's stupid setting of mock_with to :mocha,
   # which is a totally piece of garbage mocking library
@@ -20,9 +20,9 @@ RSpec.configure do |c|
 
   c.include(Jenkins::RSpecHelpers)
   c.after(:suite) do
-    # RSpec::Puppet::Coverage.report!
-    # RSpec::Puppet::Coverage.report!(90)
-    RSpec::Puppet::Coverage.report!(99)
+    RSpec::Puppet::Coverage.report!
+    # RSpec::Puppet::Coverage.report!(80)
+    # RSpec::Puppet::Coverage.report!(99)
   end
 end
 
