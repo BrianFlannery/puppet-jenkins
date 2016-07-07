@@ -9,7 +9,8 @@ README.pdf
 .rvmrc
 .ruby-*
 *.sw*
-spec/fixtures
+spec/fixtures/*
+!spec/fixtures/hiera*
 Gemfile.lock
 .vagrant*
 .bundle
