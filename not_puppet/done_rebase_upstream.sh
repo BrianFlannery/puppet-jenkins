@@ -6,7 +6,7 @@ main() {
   local hasRemote='' ;
   cd .. && {
     local bak=../Gemfile.lock.bak
-    execute mv $bak ./Gemfile.lock ;
+    [[ ! -f $bak ]] || execute mv $bak ./Gemfile.lock ;
   }
 }
 execute() {

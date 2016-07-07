@@ -5,9 +5,11 @@ upstreamRemoteName='upstream' ;
 main() {
   local hasRemote='' ;
   cd .. && {
-    local bak=../Gemfile.lock.bak
-    [[ ! -f $bak ]] || execute rm $bak ;
-    execute mv Gemfile.lock $bak ;
+    if [[ -f Gemfile.lock ]] ; then
+      local bak=../Gemfile.lock.bak
+      [[ ! -f $bak ]] || execute rm $bak ;
+      execute mv Gemfile.lock $bak ;
+    fi ;
     execute git rebase "$upstreamRemoteName"/"master" ;
   }
 }
