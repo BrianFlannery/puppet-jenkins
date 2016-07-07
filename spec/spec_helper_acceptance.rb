@@ -32,6 +32,15 @@ RSpec.configure do |c|
 
       on host, puppet('module install darin-zypprepo'), { :acceptable_exit_codes => [0] }
       on host, puppet('module install puppet-archive'), { :acceptable_exit_codes => [0] }
+
+      # hieradata
+      on host, "mkdir /etc/puppetlabs/code/environments/production/hieradata 2>/dev/null || true"
+      # Dir[File.join(File.dirname(__FILE__), 'fixtures', 'hiera', 'common.yaml')].sort.each{ |f|
+      Dir[File.join(File.dirname(__FILE__), 'fixtures', 'hiera', '*.yaml')].sort.each{ |f|
+        basename = File.basename(f)
+        # scp_to host, f, "/etc/puppetlabs/code/environments/production/hieradata/common.yaml", :delete => true
+        scp_to host, f, "/etc/puppetlabs/code/environments/production/hieradata/#{basename}", :delete => true
+      }
     end
   end
 end
