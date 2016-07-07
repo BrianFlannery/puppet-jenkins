@@ -8,7 +8,7 @@ main() {
     local bak=../Gemfile.lock.bak
     [[ ! -f $bak ]] || execute rm $bak ;
     execute mv Gemfile.lock $bak ;
-    execute git rebase "$upstreamRemoteName" "master" ;
+    execute git rebase "$upstreamRemoteName"/"master" ;
   }
 }
 execute() {
