@@ -23,4 +23,8 @@ describe Puppet::Jenkins do
       it { should eql home }
     end
   end
+  describe 'coverage' do
+    at_exit { RSpec::Puppet::Coverage.report! }
+    # at_exit { RSpec::Puppet::Coverage.report!(99) }
+  end
 end
