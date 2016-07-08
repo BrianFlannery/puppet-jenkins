@@ -9,6 +9,11 @@ class jenkins::direct_download {
   validate_string($::jenkins::package_provider)
   validate_string($::jenkins::direct_download)
   validate_absolute_path($::jenkins::package_cache_dir)
+  
+  if $::osfamily == 'Debian' {
+    package { 'daemon':
+    }
+  }
 
   # directory for temp files
   file { $::jenkins::package_cache_dir:

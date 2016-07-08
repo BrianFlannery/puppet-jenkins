@@ -13,13 +13,15 @@
 
 main() {
   cd .. && {
-    execute bundle exec rake lint
-    if [[ true == $PARALLEL_SPEC ]] ; then
-      execute bundle exec rake parallel_spec SPEC_OPTS='--format documentation --order random'
-    else
-      execute bundle exec rake spec SPEC_OPTS='--format documentation --order random'
+    if [[ skip_other != $SKIP_BEAKER ]] ; then
+      execute bundle exec rake lint
+      if [[ true == $PARALLEL_SPEC ]] ; then
+        execute bundle exec rake parallel_spec SPEC_OPTS='--format documentation --order random'
+      else
+        execute bundle exec rake spec SPEC_OPTS='--format documentation --order random'
+      fi ;
     fi ;
-    if [[ false == $SKIP_BEAKER ]] ; then
+    if [[ true != $SKIP_BEAKER ]] ; then
       export BEAKER_provision=yes ;
       export BEAKER_set="centos-7-docker" ;
       execute bundle exec rake acceptance ;

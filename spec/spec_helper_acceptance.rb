@@ -35,12 +35,21 @@ RSpec.configure do |c|
 
       # hieradata
       on host, 'mkdir /etc/puppetlabs/code/environments/production/hieradata 2>/dev/null || true'
-      # Dir[File.join(File.dirname(__FILE__), 'fixtures', 'hiera', 'common.yaml')].sort.each{ |f|
-      Dir[File.join(File.dirname(__FILE__), 'fixtures', 'hiera', '*.yaml')].sort.each{ |f|
-        basename = File.basename(f)
-        # scp_to host, f, "/etc/puppetlabs/code/environments/production/hieradata/common.yaml", :delete => true
-        scp_to host, f, "/etc/puppetlabs/code/environments/production/hieradata/#{basename}", :delete => true
-      }
+      if ENV['BEAKER_set'].match(/ubuntu/) then
+        # content = File.read(File.join(File.dirname(__FILE__), 'fixtures', 'hiera', 'common.yaml')) + File.read(File.join(File.dirname(__FILE__), 'fixtures', 'hiera', 'ubuntu.yaml'))
+        content = File.read(File.join(File.dirname(__FILE__), 'fixtures', 'hiera', 'ubuntu.yaml'))
+        create_remote_file \
+          host, \
+          "/etc/puppetlabs/code/environments/production/hieradata/common.yaml",
+          content
+      else
+        # Dir[File.join(File.dirname(__FILE__), 'fixtures', 'hiera', '*.yaml')].sort.each{ |f|
+        Dir[File.join(File.dirname(__FILE__), 'fixtures', 'hiera', 'common.yaml')].sort.each{ |f|
+          basename = File.basename(f)
+          # scp_to host, f, "/etc/puppetlabs/code/environments/production/hieradata/common.yaml", :delete => true
+          scp_to host, f, "/etc/puppetlabs/code/environments/production/hieradata/#{basename}", :delete => true
+        }
+      end
     end
   end
 end
