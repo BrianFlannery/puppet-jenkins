@@ -40,7 +40,7 @@ RSpec.configure do |c|
         content = File.read(File.join(File.dirname(__FILE__), 'fixtures', 'hiera', 'ubuntu.yaml'))
         create_remote_file \
           host, \
-          "/etc/puppetlabs/code/environments/production/hieradata/common.yaml",
+          '/etc/puppetlabs/code/environments/production/hieradata/common.yaml',
           content
       else
         # Dir[File.join(File.dirname(__FILE__), 'fixtures', 'hiera', '*.yaml')].sort.each{ |f|
