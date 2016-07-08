@@ -23,7 +23,7 @@ main() {
       export BEAKER_provision=yes ;
       export BEAKER_set="centos-7-docker" ;
       execute bundle exec rake acceptance ;
-      if [[ false == $BEAKER_UBUNTU ]] ; then
+      if [[ true == $BEAKER_UBUNTU ]] ; then
         export BEAKER_set="ubuntu-14.04-docker" ;
         execute bundle exec rake acceptance ;
       fi ;
