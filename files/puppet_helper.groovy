@@ -29,6 +29,7 @@ import jenkins.security.*
 import org.apache.commons.io.IOUtils
 import org.jenkinsci.plugins.*
 
+@InheritConstructors
 class InvalidAuthenticationStrategy extends Exception{}
 @InheritConstructors
 class UnsupportedCredentialsClass extends Exception {}
@@ -739,7 +740,7 @@ class Actions {
         realm = new hudson.security.HudsonPrivateSecurityRealm(false, false, null)
         break
       default:
-        throw new InvalidAuthenticationStrategy()
+        throw new InvalidAuthenticationStrategy("Please set jenkins::security::security_model to either 'unsecured', 'full_control', or 'ldap', not '$security_model'.")
     }
     j.setAuthorizationStrategy(strategy)
     j.setSecurityRealm(realm)
