@@ -1,0 +1,2 @@
+---
+jenkins::direct_download: http://pkg.jenkins-ci.org/debian-stable/binary/jenkins_1.651.3_all.deb
