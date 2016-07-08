@@ -9,7 +9,7 @@
 
 [[ $SKIP_BEAKER ]]   || SKIP_BEAKER=true ;
 [[ $BEAKER_UBUNTU ]] || BEAKER_UBUNTU=false ;
-[[ $PARALLEL_SPEC ]] || PARALLEL_SPEC=true ;
+[[ $PARALLEL_SPEC ]] || PARALLEL_SPEC=false ;
 
 main() {
   cd .. && {
