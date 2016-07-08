@@ -5,8 +5,8 @@
   "author": "R. Tyler Croy <tyler@monkeypox.org>, Joshua Hoblitt <josh@hoblitt.com>"
   },
   "name": "gsio-jenkins",
-  "version": "1.7.3",
-  "author": "gs rebase of 1.7.0, R. Tyler Croy <tyler@monkeypox.org>, Joshua Hoblitt <josh@hoblitt.com> per 1.6.5, Brian Flannery <bflannery.0wK0@gmail.com>",
+  "version": "1.6.6",
+  "author": "gs rebase of 1.7.0, R. Tyler Croy <tyler@monkeypox.org>, Joshua Hoblitt <josh@hoblitt.com> per 1.6.6, Brian Flannery <bflannery.0wK0@gmail.com>",
   "license": "Apache-2.0",
   "summary": "Manage the Jenkins continuous integration service with Puppet",
   "source": "https://github.com/jenkinsci/puppet-jenkins",
